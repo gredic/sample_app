@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ruby on Rails Tutorial Sample App | <%= @title %></title>
+</head>
+108
+Chapter 3: Mostly Static Pages
+<body>
+<h1>Contact</h1>
+<p>
+Contact Ruby on Rails Tutorial about the sample app at the
+<a href="http://railstutorial.org/feedback">feedback page</a>.
+</p>
+</body>
+</html>
+

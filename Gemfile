@@ -5,6 +5,8 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'spork'
+
 group :production, :staging do
   gem "pg"
 end
@@ -14,10 +16,10 @@ group :development, :test do
 end
 
 group :development do
-gem 'rspec-rails', '2.0.1'
+gem 'rspec-rails'
 end
 group :test do
-gem 'rspec', '2.0.1'
+gem 'rspec'
 gem 'webrat', '0.7.1'
 end
 
