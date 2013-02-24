@@ -14,14 +14,15 @@ end
 
 group :development, :test do
 	gem "sqlite3-ruby", :require => "sqlite3"
+	gem 'rspec-rails'
 end
 
 group :development do
-gem 'rspec-rails'
+# gem 'rspec-rails'
 gem 'annotate'
 end
 group :test do
-gem 'rspec'
+#gem 'rspec'
 gem 'webrat', '0.7.1'
 gem 'factory_girl_rails', '1.0'
 end
