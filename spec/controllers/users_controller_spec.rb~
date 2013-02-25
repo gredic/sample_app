@@ -281,7 +281,7 @@ describe UsersController do
  		describe "as a non-admin user" do
  			it "should protect the page" do
  				test_sign_in(@user)
- 				delete :destory, :id => @user
+ 				delete :destroy, :id => @user
  				response.should redirect_to(root_path)
  			end
  		end
@@ -289,22 +289,56 @@ describe UsersController do
  		describe "as an admin user" do
  			
  			before(:each) do
- 				admin = Factory(:user, :email => "admin@example.com", :admin => true)
+ 				@admin = Factory(:user, :email => "admin@example.com", :admin => true)
  				test_sign_in(admin)
  			end
  			
- 			it "should destory the user" do
+ 			it "should destroy the user" do
  				lambda do
- 					delete :destroy, :id => @user
+ 					delete :destroy, :id => @user.id
  				end.should change(User, :count).by(-1)
  			end
  			
  			it "should redirect to the users page" do
- 				delete :destory, :id => @user
+ 				delete :destroy, :id => @user.id
  				response.should redirect_to(users_path)
+ 			end
+ 			
+ 			it "should not delete himself" do
+ 				lambda do
+ 					delete :destroy, :id => @admin.id
+ 				end.should_not change(User, :count).by(-1)
  			end
  		end
  	end
+ 	
+ 	describe "delete links" do
+ 	
+ 		describe "for non-admins" do
+ 	
+			before(:each) do
+	 			@user = Factory(:user)
+	 		end 	
+	 	
+	 		it "should not show for normal users" do
+	 			get :index, :id => @user
+	 			response.should_not have_selector("a", :content => "delete")
+			end
+		end
+		
+		describe "for admins" do
+		
+			before(:each) do
+ 				admin = Factory(:user, :email => "admin@example.com", :admin => true)
+ 				test_sign_in(admin)
+ 			end
+		
+			it "should show for admin users" do
+	 			get :index, :id => @user
+	 			response.should have_selector("a", :content => "delete")
+			end
+		end
+	end
  					
   
 end
