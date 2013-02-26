@@ -290,7 +290,7 @@ describe UsersController do
  			
  			before(:each) do
  				@admin = Factory(:user, :email => "admin@example.com", :admin => true)
- 				test_sign_in(admin)
+ 				test_sign_in(@admin)
  			end
  			
  			it "should destroy the user" do
@@ -329,14 +329,16 @@ describe UsersController do
 		describe "for admins" do
 		
 			before(:each) do
- 				admin = Factory(:user, :email => "admin@example.com", :admin => true)
- 				test_sign_in(admin)
+ 				@admin = Factory(:user, :email => "admin@example.com", :admin => true)
+ 				test_sign_in(@admin)
  			end
 		
 			it "should show for admin users" do
 	 			get :index, :id => @user
 	 			response.should have_selector("a", :content => "delete")
 			end
+			
+		
 		end
 	end
  					
